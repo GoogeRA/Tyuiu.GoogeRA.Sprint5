@@ -13,34 +13,32 @@ namespace Tyuiu.GoogeRA.Sprint5.Task5.V27.Lib
     {
         public double LoadFromDataFile(string path)
         {
-            int res = 0;
-            using (StreamReader reader = new StreamReader(path))
-            {
-                string line;
-     
-                while ((line = reader.ReadLine()) != null )
+            string[] strNumbs = File.ReadAllLines(path);
+            int mostX = 0;
+            double count = 0;
+            double summ = 0;
+            foreach (string number in strNumbs)
+                if (!number.Contains(',') && int.Parse(number) % 5 == 0 && int.Parse(number) > mostX)
                 {
-                    for (int i = 0; i < line.Length; i++)
-                    {
-                        if (line[i] % 5 == 0) i++;
-                        {
-                            res++;
-                            
-                        }
-                    }
+                    mostX = int.Parse(number);
                 }
+            double res = 0;
+            for (int i = 1; i <= mostX; i++)
+            {
+                if (i % 5 == 0)
+                {
+                    count++;
+                    summ += i;
+                    res = Math.Round(summ / count, 3);
+
+                }
+                
             }
             return res;
 
-            //int num = int.Parse(Console.ReadLine());
-            //while (num != 0)
-            //{
-             ///   if (num % 5 = 0) k++;
-                
-            //}
-            //Console.WriteLine($"Количество чисел кратных пяти = ", k);
-
 
         }
+
     }
+    
 }
